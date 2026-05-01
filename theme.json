@@ -1,0 +1,22 @@
+{
+  "name": "8bitdo-ultimate-2c-glyphs",
+  "display_name": "8BitDo Ultimate 2C Controller",
+  "author": "GGabrielDev",
+  "version": "v1.0",
+  "manifest_version": 9,
+  "inject": {
+    "shared.css": [
+      "bigpicture",
+      "QuickAccess",
+      "MainMenu"
+    ]
+  },
+  "tabs": {
+    "all": [
+      "bigpicture",
+      "QuickAccess",
+      "MainMenu"
+    ]
+  },
+  "id": "e82b7194-4d2a-4138-8c19-98a715f2b8a2"
+}

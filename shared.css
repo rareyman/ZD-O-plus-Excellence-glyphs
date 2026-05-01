@@ -1,0 +1,83 @@
+:root {
+  --bitdo-guide-img: url(/themes_custom/8bitdo-ultimate-2c-glyphs/assets/8bitdo_button_guide.svg);
+  --bitdo-controller-img: url(/themes_custom/8bitdo-ultimate-2c-glyphs/assets/8bitdo_ultimate_controller_config.svg);
+}
+
+/* Replacement for the controller background image */
+.controller_xboxone [role="tabpanel"] > div:first-child > div:first-child > div:nth-child(2) > div,
+.controller_generic [role="tabpanel"] > div:first-child > div:first-child > div:nth-child(2) > div {
+  background-image: var(--bitdo-controller-img) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+}
+
+/* Hide the original "Gamepad" text using structural targeting */
+.controller_generic > div:first-child,
+.controller_xboxone > div:first-child {
+  font-size: 0px !important;
+}
+
+/* Inject the 8BitDo name with perfectly matched styles */
+.controller_generic > div:first-child::after,
+.controller_xboxone > div:first-child::after {
+  content: "8BITDO ULTIMATE 2C CONTROLLER";
+  font-size: 10px !important;
+  color: #dcdedf;
+  font-weight: bold !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  visibility: visible;
+}
+
+/* Replaces Steam/XBOX logo wiht 8Bitdo logo */
+img[src='/steaminputglyphs/xbox_button_logo.svg'] {
+  content: var(--bitdo-guide-img);
+}
+
+/* Replace Colorful ABXY with Monochrome ABXY */
+img[src*="shared_color_button_a"] {
+    content: url("/steaminputglyphs/shared_button_a.svg") !important;
+}
+
+img[src*="shared_color_button_b"] {
+    content: url("/steaminputglyphs/shared_button_b.svg") !important;
+}
+
+img[src*="shared_color_button_x"] {
+    content: url("/steaminputglyphs/shared_button_x.svg") !important;
+}
+
+img[src*="shared_color_button_y"] {
+    content: url("/steaminputglyphs/shared_button_y.svg") !important;
+}
+
+/* Precise replacement for Select/Back (-) using built-in Pro Controller icon */
+img[src*="xbox360_button_select"] {
+    content: url("/steaminputglyphs/switchpro_button_minus.svg") !important;
+}
+
+/* Precise replacement for Start/Forward (+) using built-in Pro Controller icon */
+img[src*="xbox360_button_start"] {
+    content: url("/steaminputglyphs/switchpro_button_plus.svg") !important;
+}
+
+/*
+#Footer img[src*="xbox360_button_select.svg"],
+#Footer img[src*="xbox360_button_start.svg"] {
+    width: 24px !important; 
+    height: 24px !important;
+    padding: 6px !important; 
+    box-sizing: border-box !important;
+    vertical-align: middle !important;
+}
+*/
+
+/* Swap L5/R5 icons to Steam Deck's native L4/R4 */
+img[src*="sd_l5"] {
+    content: url("/steaminputglyphs/sd_l4.svg") !important;
+}
+
+img[src*="sd_r5"] {
+    content: url("/steaminputglyphs/sd_r4.svg") !important;
+}
