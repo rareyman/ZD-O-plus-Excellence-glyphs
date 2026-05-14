@@ -1,5 +1,89 @@
 # TODO
 
+Since the ZD-O+ Excellence identifies as a standard Xbox controller, Steam won't natively "see" the extra 6 buttons as unique inputs (L4/L5, etc.) because the standard X-input driver doesn't support them. Instead, those buttons are almost certainly mirroring existing Xbox inputs via the controller's onboard firmware or the ZD mobile app.
+
+Here is the updated execution plan for your repo.
+
+### 1. Updated Asset Strategy (Affinity Designer 2)
+
+Since you're using Affinity, you should avoid using the raw SVG `<text>` elements and instead **Convert to Curves** (Cmd+Enter) before exporting. This ensures the labels (M1, LM, etc.) look exactly like the physical hardware font.
+
+* **Home Icon:** The ZD-O+ home button is a simple double-ring circle.
+* **ABXY:** Keep these monochrome (white/silver).
+* **M1/M2/LM/RM:** Since they mirror standard buttons, we will map them to the "Pro Controller" classes Steam uses for visual overrides.
+
+### 2. Task List
+
+* [ ] **Run the Python Generator:** Use the script I provided to generate the base shapes.
+* [ ] **Refine in Affinity Designer 2:**
+* [ ] Import `a.svg`, `b.svg`, etc. Change stroke to `#E0E0E0` and convert text to curves.
+* [ ] Import `home.svg`. Add a smaller concentric circle to match the ZD logo style.
+* [ ] Import `controller.svg`. Modify the 8BitDo silhouette to be more angular. Add the **LM/RM** buttons (between LB/RB) and **LK/RK** (the small buttons adjacent to the triggers).
+
+
+* [ ] **Map the "Mirror" Logic in CSS:**
+Since Steam sees an Xbox controller, it doesn't have native `LM` or `LK` classes. To get them to appear in the UI, you have to target the "Rear Button" classes that Steam UI uses when a user enables "Extended Xbox Support."
+
+```css
+/* color.css mappings */
+
+/* Rear Paddles */
+.GamepadGlyph.L4 { background-image: url("assets/zdo/m1.svg"); }
+.GamepadGlyph.R4 { background-image: url("assets/zdo/m2.svg"); }
+
+/* Auxiliary Shoulders (Often mapped to L5/R5 in hybrid profiles) */
+.GamepadGlyph.L5 { background-image: url("assets/zdo/lm.svg"); }
+.GamepadGlyph.R5 { background-image: url("assets/zdo/rm.svg"); }
+
+/* Special Case: Trigger-adjacent LK/RK */
+/* These usually don't have separate glyphs in Steam. 
+   Recommendation: Design a "Trigger+Button" glyph for L2/R2 
+   to show the LK/RK interaction visually. */
+
+```
+
+### 3. Updated Python Script (Optimized for Affinity Import)
+
+I've tweaked this to ensure the layers are named properly for when you open them in Affinity.
+
+```python
+import os
+
+def generate_zdo_svg(name, content):
+    path = "assets/zdo"
+    os.makedirs(path, exist_ok=True)
+    with open(f"{path}/{name}.svg", "w") as f:
+        f.write(f'<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">\n{content}\n</svg>')
+
+# Generic Monochrome ABXY
+for b in ["A", "B", "X", "Y"]:
+    generate_zdo_svg(b.lower(), f'<circle cx="20" cy="20" r="18" fill="none" stroke="#E0E0E0" stroke-width="2"/><text x="20" y="21" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="18" fill="#E0E0E0">{b}</text>')
+
+# Auxiliary Buttons
+aux = {
+    "lm": "rect x='5' y='12' width='30' height='16' rx='8'",
+    "lk": "rect x='12' y='5' width='16' height='30' rx='8'",
+    "m1": "path d='M30 10 L15 15 C10 18 10 22 15 25 L30 30'"
+}
+# (Duplicate for RM, RK, M2 by mirroring)
+
+for k, v in aux.items():
+    label = k.upper()
+    tag = f'<{v} fill="none" stroke="#E0E0E0" stroke-width="2"/>'
+    text = f'<text x="20" y="21" text-anchor="middle" font-size="9" fill="#E0E0E0" font-family="Arial">{label}</text>'
+    generate_zdo_svg(k, tag + text)
+
+```
+
+### 4. Controller Outline Tip
+
+Since the ZD-O+ Excellence is modular, you might want to create a "Technical Drawing" style outline in Affinity. Use a **0.5pt stroke** for the internal modular seams (where the faceplate pops off) and a **1.5pt stroke** for the main silhouette. This fits the "Excellence" engineering theme perfectly.
+
+Once you have the SVGs saved to your repo, do you need help setting up the `theme.json` to make these selectable as a "Generic Monochrome" option in CSS Loader?
+
+
+***
+
 To transition the fork for the ZD-O+ Excellence, follow this structured plan. This focuses on asset replacement and CSS targeting for the unique hardware layout.
 
 ### Phase 1: Asset Preparation (SVG)
