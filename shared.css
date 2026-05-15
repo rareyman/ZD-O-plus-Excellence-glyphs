@@ -1,6 +1,6 @@
 :root {
-  --bitdo-guide-img: url(/themes_custom/8bitdo-ultimate-2c-glyphs/assets/8bitdo_button_guide.svg);
-  --bitdo-controller-img: url(/themes_custom/8bitdo-ultimate-2c-glyphs/assets/8bitdo_ultimate_controller_config.svg);
+  --guide-img: url(assets/home-circle.svg);
+  --bitdo-controller-img: url(assets/zd-oplus-excellence-controller.svg);
 }
 
 /* Replacement for the controller background image */
@@ -18,10 +18,10 @@
   font-size: 0px !important;
 }
 
-/* Inject the 8BitDo name with perfectly matched styles */
+/* Inject the ZD-O+ name with perfectly matched styles */
 .controller_generic > div:first-child::after,
 .controller_xboxone > div:first-child::after {
-  content: "8BITDO ULTIMATE 2C CONTROLLER";
+  content: "ZD-O+ EXCELLENCE";
   font-size: 10px !important;
   color: #dcdedf;
   font-weight: bold !important;
@@ -30,48 +30,44 @@
   visibility: visible;
 }
 
-/* Replaces Steam/XBOX logo wiht 8Bitdo logo */
+/* Replaces Steam/XBOX logo with theme guide logo */
+/* Replace Steam/XBOX logo with theme guide logo; use home icon for guide/home where appropriate */
 img[src='/steaminputglyphs/xbox_button_logo.svg'] {
-  content: var(--bitdo-guide-img);
+  content: var(--guide-img) !important;
 }
 
-/* Replace Colorful ABXY with Monochrome ABXY */
+/* Replace Colorful ABXY with Monochrome ABXY (point to theme assets)
+   Uses wildcard matching for compatibility with different Steam builds */
 img[src*="shared_color_button_a"] {
-    content: url("/steaminputglyphs/shared_button_a.svg") !important;
+  content: url("assets/shared_button_a.svg") !important;
 }
 
 img[src*="shared_color_button_b"] {
-    content: url("/steaminputglyphs/shared_button_b.svg") !important;
+  content: url("assets/shared_button_b.svg") !important;
 }
 
 img[src*="shared_color_button_x"] {
-    content: url("/steaminputglyphs/shared_button_x.svg") !important;
+  content: url("assets/shared_button_x.svg") !important;
 }
 
 img[src*="shared_color_button_y"] {
-    content: url("/steaminputglyphs/shared_button_y.svg") !important;
+  content: url("assets/shared_button_y.svg") !important;
 }
 
 /* Precise replacement for Select/Back (-) using built-in Pro Controller icon */
 img[src*="xbox360_button_select"] {
-    content: url("/steaminputglyphs/switchpro_button_minus.svg") !important;
+  content: url("assets/button_minus.svg") !important;
 }
 
 /* Precise replacement for Start/Forward (+) using built-in Pro Controller icon */
 img[src*="xbox360_button_start"] {
-    content: url("/steaminputglyphs/switchpro_button_plus.svg") !important;
+  content: url("assets/button_plus.svg") !important;
 }
 
-/*
-#Footer img[src*="xbox360_button_select.svg"],
-#Footer img[src*="xbox360_button_start.svg"] {
-    width: 24px !important; 
-    height: 24px !important;
-    padding: 6px !important; 
-    box-sizing: border-box !important;
-    vertical-align: middle !important;
+/* Replace generic Home/Guide icon if present */
+img[src*="home"], img[src*="guide"] {
+  content: url("assets/home-circle.svg") !important;
 }
-*/
 
 /* Swap L5/R5 icons to Steam Deck's native L4/R4 */
 img[src*="sd_l5"] {

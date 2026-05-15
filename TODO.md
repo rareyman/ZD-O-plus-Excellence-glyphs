@@ -21,25 +21,21 @@ In **Affinity Designer 2**, open your `controller.svg` and add a small, clean te
 
 ### 3. Revised Task List
 
-* [ ] **Generate Monochrome Glyphs:**
-* [ ] Create/Export `a.svg`, `b.svg`, `x.svg`, `y.svg` in solid `#FFFFFF` or `#E0E0E0`.
-* [ ] Create `home.svg` using the concentric circle design.
+- [x] **Generate Monochrome Glyphs:**
+    - [x] Created `assets/shared_button_a.svg`, `assets/shared_button_b.svg`, `assets/shared_button_x.svg`, `assets/shared_button_y.svg` (letters centered, weight adjusted)
+    - [x] Created `assets/button_plus.svg` and `assets/button_minus.svg`
+    - [ ] `assets/home.svg` exists as a placeholder; awaiting your final branded Home icon
 
+- [x] **Update CSS and metadata:**
+    - [x] `shared.css` updated to reference new theme assets
+    - [x] `theme.json` display name updated to `ZD-O+ Excellence`
 
-* [ ] **Update Controller Outline:**
-* [ ] Source a standard Xbox Series silhouette.
-* [ ] **Add the Note:** Place the reminder text regarding on-device mapping into the SVG.
-* [ ] **Convert to Curves:** Ensure all text in the SVG is converted to paths so CSS Loader renders it correctly without font dependencies.
+- [ ] **Test locally with Steam CSS Loader**
 
+- [ ] **Convert letter glyphs to SVG paths (no font dependency)**
 
-* [ ] **Streamline `color.css`:**
-* [ ] Point all standard `.GamepadGlyph` classes to your new monochrome assets.
-* [ ] Remove any 8BitDo-specific logic for extra buttons (C/Z) to keep the file lean.
-
-
-* [ ] **Update `theme.json`:**
-* [ ] Set the name to **"ZD-O+ Excellence (Monochrome)"**.
-* [ ] Ensure the description mentions that extra buttons are managed via hardware/app mapping.
+- [x] **Documentation:**
+    - [x] README updated to reference `ZD-O+ Excellence`
 
 
 
